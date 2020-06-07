@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ejb" name="HighRadiusProject:ejb exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/HighRadiusProject_ejb_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="HighRadiusProject/ejb/EJB" />
+      <element id="module-output" name="HighRadiusProject" />
+    </root>
+  </artifact>
+</component>

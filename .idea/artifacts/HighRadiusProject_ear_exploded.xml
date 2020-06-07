@@ -4,7 +4,11 @@
     <root id="root">
       <element id="javaee-facet-resources" facet="HighRadiusProject/javaeeApplication/javaEEApplication" />
       <element id="directory" name="web.war">
-        <element id="artifact" artifact-name="HighRadiusProject:war exploded" />
+        <element id="artifact" artifact-name="HighRadiusProject" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="mysql-connector-java-8.0.19" />
+        <element id="library" level="project" name="Java EE 6-Java EE 6" />
       </element>
     </root>
   </artifact>
