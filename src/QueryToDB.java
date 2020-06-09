@@ -9,9 +9,11 @@ public class QueryToDB {
 		// Initialising MySQL Class with url, username and password
 		MySQLTool DB = new MySQLTool("jdbc:mysql://localhost:3306/project", "root", "root");
 
-		ArrayList<CustomerInvoicePOJO> searched = DB.getByKeyValue("clearing_date", null);
-		for (CustomerInvoicePOJO tuple: searched) {
+		//ArrayList<CustomerInvoicePOJO> searched = DB.getByKeyValue("clearing_date", null);
+		ArrayList<CustomerInvoicePOJO> searched = DB.getAllData(50);
+		System.out.println(searched.size());
+		/*for (CustomerInvoicePOJO tuple: searched) {
 			System.out.println(tuple.getAcct_doc_header_id());
-		}
+		}*/
 	}
 }

@@ -1,5 +1,4 @@
 package com.database;
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -9,9 +8,9 @@ public class MySQLTool {
 	ResultSet result = null;
 	boolean result_available = false;
 	String S_driver = "com.mysql.cj.jdbc.Driver";
-	String S_url = "jdbc:mysql://localhost:3306/project";
-	String S_user = "root";
-	String S_password = "";
+	String S_url = null;
+	String S_user = null;
+	String S_password = null;
 
 	//constructor to store user-configuration
 	public MySQLTool(String url, String user, String password){
@@ -420,6 +419,24 @@ public class MySQLTool {
 			}
 		}else{
 			System.out.println("Invalid Key Found");
+		}
+		return result;
+	}
+
+	// To get all records
+	public ArrayList<CustomerInvoicePOJO> getAllData(Integer limit){
+		ArrayList<CustomerInvoicePOJO> result = new ArrayList<>();
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			String query = "SELECT * FROM customer_invoice LIMIT "+limit+";";
+			ResultSet resultset = stmt.executeQuery(query);
+			result = makePojoByResultSet(resultset);
+		} catch (Exception e){
+			System.out.println(e.toString());
+		} finally{
+			close();
 		}
 		return result;
 	}
