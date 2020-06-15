@@ -6,6 +6,6 @@ import java.util.Scanner;
 public class HelloWorld {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws ParseException {
-        System.out.println(Integer.valueOf(5));
+        System.out.println(Integer.parseInt("r5"));
     }
 }

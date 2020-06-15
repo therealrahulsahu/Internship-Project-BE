@@ -55,336 +55,580 @@ public class MySQLTool {
 			CustomerInvoicePOJO tuple = new CustomerInvoicePOJO();
 			String[] features = tuple.features;
 
-			val_int = search.getInt(features[0]);
+			try{
+				val_int = search.getInt(features[0]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPk_id(null);
 			}else {
 				tuple.setPk_id(val_int);
 			}
 
-			val_int = search.getInt(features[1]);
+			try{
+				val_int = search.getInt(features[1]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setAcct_doc_header_id(null);
 			}else {
 				tuple.setAcct_doc_header_id(val_int);
 			}
 
-			val_int = search.getInt(features[2]);
+			try{
+				val_int = search.getInt(features[2]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setCompany_id(null);
 			}else {
 				tuple.setCompany_id(val_int);
 			}
 
-			val_int = search.getInt(features[3]);
+			try{
+				val_int = search.getInt(features[3]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
+
 			if(search.wasNull()){
 				tuple.setDocument_number(null);
 			}else {
 				tuple.setDocument_number(val_int);
 			}
 
-			val_int = search.getInt(features[4]);
+			try{
+				val_int = search.getInt(features[4]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_number_norm(null);
 			}else {
 				tuple.setDocument_number_norm(val_int);
 			}
 
-			val_string = search.getString(features[5]);
+			try{
+				val_string = search.getString(features[5]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setBusiness_code(null);
 			}else {
 				tuple.setBusiness_code(val_string);
 			}
 
-			val_string = search.getString(features[6]);
+			try{
+				val_string = search.getString(features[6]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setCreate_year(null);
 			}else {
 				tuple.setCreate_year(val_string);
 			}
 
-			val_int = search.getInt(features[7]);
+			try{
+				val_int = search.getInt(features[7]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_line_number(null);
 			}else {
 				tuple.setDocument_line_number(val_int);
 			}
 
-			val_string = search.getString(features[8]);
+			try{
+				val_string = search.getString(features[8]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDoctype(null);
 			}else {
 				tuple.setDoctype(val_string);
 			}
 
-			val_int = search.getInt(features[9]);
+			try{
+				val_int = search.getInt(features[9]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
+
 			if(search.wasNull()){
 				tuple.setCustomer_number(null);
 			}else {
 				tuple.setCustomer_number(val_int);
 			}
 
-			val_int = search.getInt(features[10]);
+			try{
+				val_int = search.getInt(features[10]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setCustomer_number_norm(null);
 			}else {
 				tuple.setCustomer_number_norm(val_int);
 			}
 
-			val_int = search.getInt(features[11]);
+			try{
+				val_int = search.getInt(features[11]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setFk_customer_map_id(null);
 			}else {
 				tuple.setFk_customer_map_id(val_int);
 			}
 
-			val_string = search.getString(features[12]);
+			try{
+				val_string = search.getString(features[12]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setCustomer_name(null);
 			}else {
 				tuple.setCustomer_name(val_string);
 			}
 
-			val_string = search.getString(features[13]);
+			try{
+				val_string = search.getString(features[13]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDivision(null);
 			}else {
 				tuple.setDivision(val_string);
 			}
 
-			val_string = search.getString(features[14]);
+			try{
+				val_string = search.getString(features[14]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_create_date(null);
 			}else {
 				tuple.setDocument_create_date(val_string);
 			}
 
-			val_string = search.getString(features[15]);
+			try{
+				val_string = search.getString(features[15]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_create_date_norm(null);
 			}else {
 				tuple.setDocument_create_date_norm(val_string);
 			}
 
-			val_string = search.getString(features[16]);
+			try{
+				val_string = search.getString(features[16]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPosting_date(null);
 			}else {
 				tuple.setPosting_date(val_string);
 			}
 
-			val_string = search.getString(features[17]);
+			try{
+				val_string = search.getString(features[17]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPosting_date_norm(null);
 			}else {
 				tuple.setPosting_date_norm(val_string);
 			}
 
-			val_string = search.getString(features[18]);
+			try{
+				val_string = search.getString(features[18]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPosting_id(null);
 			}else {
 				tuple.setPosting_id(val_string);
 			}
 
-			val_string = search.getString(features[19]);
+			try{
+				val_string = search.getString(features[19]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDue_date(null);
 			}else {
 				tuple.setDue_date(val_string);
 			}
 
-			val_string = search.getString(features[20]);
+			try{
+				val_string = search.getString(features[20]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDue_date_norm(null);
 			}else {
 				tuple.setDue_date_norm(val_string);
 			}
 
-			val_string = search.getString(features[21]);
+			try{
+				val_string = search.getString(features[21]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setOrder_date(null);
 			}else {
 				tuple.setOrder_date(val_string);
 			}
 
-			val_string = search.getString(features[22]);
+			try{
+				val_string = search.getString(features[22]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setOrder_date_norm(null);
 			}else {
 				tuple.setOrder_date_norm(val_string);
 			}
 
-			val_int = search.getInt(features[23]);
+			try{
+				val_int = search.getInt(features[23]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setInvoice_id(null);
 			}else {
 				tuple.setInvoice_id(val_int);
 			}
 
-			val_int = search.getInt(features[24]);
+			try{
+				val_int = search.getInt(features[24]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setInvoice_id_norm(null);
 			}else {
 				tuple.setInvoice_id_norm(val_int);
 			}
 
-			val_string = search.getString(features[25]);
+			try{
+				val_string = search.getString(features[25]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setBaseline_create_date(null);
 			}else {
 				tuple.setBaseline_create_date(val_string);
 			}
 
-			val_string = search.getString(features[26]);
+			try{
+				val_string = search.getString(features[26]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setInvoice_date_norm(null);
 			}else {
 				tuple.setInvoice_date_norm(val_string);
 			}
 
-			val_float = search.getFloat(features[27]);
+			try{
+				val_float = search.getFloat(features[27]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setTotal_open_amount(null);
 			}else {
 				tuple.setTotal_open_amount(val_float);
 			}
 
-			val_float = search.getFloat(features[28]);
+			try{
+				val_float = search.getFloat(features[28]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setTotal_open_amount_norm(null);
 			}else {
 				tuple.setTotal_open_amount_norm(val_float);
 			}
 
-			val_int = search.getInt(features[29]);
+			try{
+				val_int = search.getInt(features[29]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setCust_payment_terms(null);
 			}else {
 				tuple.setCust_payment_terms(val_int);
 			}
 
-			val_string = search.getString(features[30]);
+			try{
+				val_string = search.getString(features[30]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setBusiness_area(null);
 			}else {
 				tuple.setBusiness_area(val_string);
 			}
 
-			val_string = search.getString(features[31]);
+			try{
+				val_string = search.getString(features[31]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setShip_date(null);
 			}else {
 				tuple.setShip_date(val_string);
 			}
 
-			val_string = search.getString(features[32]);
+			try{
+				val_string = search.getString(features[32]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
+
 			if(search.wasNull()){
 				tuple.setShip_to(null);
 			}else {
 				tuple.setShip_to(val_string);
 			}
 
-			val_string = search.getString(features[33]);
+			try{
+				val_string = search.getString(features[33]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
+
 			if(search.wasNull()){
 				tuple.setClearing_date(null);
 			}else {
 				tuple.setClearing_date(val_string);
 			}
 
-			val_string = search.getString(features[34]);
+			try{
+				val_string = search.getString(features[34]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setClearing_date_norm(null);
 			}else {
 				tuple.setClearing_date_norm(val_string);
 			}
 
-			val_string = search.getString(features[35]);
+			try{
+				val_string = search.getString(features[35]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setReason_code(null);
 			}else {
 				tuple.setReason_code(val_string);
 			}
 
-			val_int = search.getInt(features[36]);
+			try{
+				val_int = search.getInt(features[36]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setIsopen(null);
 			}else {
 				tuple.setIsopen(val_int);
 			}
 
-			val_string = search.getString(features[37]);
+			try{
+				val_string = search.getString(features[37]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDiscount_due_date_norm(null);
 			}else {
 				tuple.setDiscount_due_date_norm(val_string);
 			}
 
-			val_string = search.getString(features[38]);
+			try{
+				val_string = search.getString(features[38]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDebit_credit_indicator(null);
 			}else {
 				tuple.setDebit_credit_indicator(val_string);
 			}
 
-			val_string = search.getString(features[39]);
+			try{
+				val_string = search.getString(features[39]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPayment_method(null);
 			}else {
 				tuple.setPayment_method(val_string);
 			}
 
-			val_string = search.getString(features[40]);
+			try{
+				val_string = search.getString(features[40]);
+			}catch (SQLException e){
+				val_string = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_creation_date(null);
 			}else {
 				tuple.setDocument_creation_date(val_string);
 			}
 
-			val_float = search.getFloat(features[41]);
+			try{
+				val_float = search.getFloat(features[41]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setInvoice_amount_doc_currency(null);
 			}else {
 				tuple.setInvoice_amount_doc_currency(val_float);
 			}
 
-			val_int = search.getInt(features[42]);
+			try{
+				val_int = search.getInt(features[42]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDocument_id(null);
 			}else {
 				tuple.setDocument_id(val_int);
 			}
 
-			val_float = search.getFloat(features[43]);
+			try{
+				val_float = search.getFloat(features[43]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setActual_open_amount(null);
 			}else {
 				tuple.setActual_open_amount(val_float);
 			}
 
-			val_float = search.getFloat(features[44]);
+			try{
+				val_float = search.getFloat(features[44]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setPaid_amount(null);
 			}else {
 				tuple.setPaid_amount(val_float);
 			}
 
-			val_int = search.getInt(features[45]);
+			try{
+				val_int = search.getInt(features[45]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDayspast_due(null);
 			}else {
 				tuple.setDayspast_due(val_int);
 			}
 
-			val_int = search.getInt(features[46]);
+			try{
+				val_int = search.getInt(features[46]);
+			}catch (SQLException e){
+				val_int = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setInvoice_age(null);
 			}else {
 				tuple.setInvoice_age(val_int);
 			}
 
-			val_float = search.getFloat(features[47]);
+			try{
+				val_float = search.getFloat(features[47]);
+			}catch (SQLException e){
+				val_float = null;
+			}
+
 			if(search.wasNull()){
 				tuple.setDisputed_amount(null);
 			}else {
@@ -471,5 +715,107 @@ public class MySQLTool {
 		}catch(SQLException se){
 			System.out.println(se.toString());
 		}
+	}
+
+	// select query by only string
+	public ArrayList<CustomerInvoicePOJO> selectQuery(String query){
+		ArrayList<CustomerInvoicePOJO> result = new ArrayList<>();
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			result = makePojoByResultSet(resultset);
+		} catch (Exception e){
+			System.out.println(e.toString());
+		} finally{
+			close();
+		}
+		return result;
+	}
+
+	public Integer customSingleValueQuery(String query, String alias){
+		Integer out = null;
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			result = stmt.executeQuery(query);
+			while (result.next()){
+				out = result.getInt(alias);
+			}
+		} catch (Exception e){
+			System.out.println(e.toString());
+		} finally{
+			close();
+		}
+		return out;
+	}
+
+	public String getCustomerListByTotalOpenAmount(String name_regex){
+		String result = "";
+		String query = "select round(sum(total_open_amount)) as open_amount, customer_name, customer_number " +
+				"from customer_invoice where isopen=1 and customer_name regexp '"+
+				name_regex+"' group by customer_name, customer_number;";
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			ResultSet set = stmt.executeQuery(query);
+			while (set.next()){
+				String tuple="{";
+				tuple += "\"open_amount\":"+set.getInt("open_amount")+",";
+				tuple += "\"customer_name\":\""+set.getString("customer_name")+"\",";
+				tuple += "\"customer_number\":"+set.getInt("customer_number");
+				tuple += "},";
+				result += tuple;
+			}
+
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}finally {
+			close();
+		}
+		if(result.length() > 0){
+			result = result.substring(0, result.length()-1);
+		}
+		return "["+result+"]";
+	}
+
+	public String getCustomerNameByNumber(int number){
+		String query = "select customer_name from customer_invoice where customer_number="+number+" limit 1";
+		String query2 = "select count(*) as open_invoices from customer_invoice where isopen=1 and customer_number="+number+";";
+		String query3 = "select round(sum(total_open_amount)) as open_amount from customer_invoice where isopen=1 and customer_number="+number+";";
+		String result = "{";
+		String tuple = "";
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			ResultSet set = stmt.executeQuery(query);
+			while (set.next()){
+				tuple = set.getString("customer_name");
+			}
+			result += "\"customer_name\":\""+tuple+"\",";
+
+			set = stmt.executeQuery(query2);
+			while (set.next()){
+				tuple = ""+set.getInt("open_invoices");
+			}
+			result += "\"open_invoices\":"+tuple+",";
+
+			set = stmt.executeQuery(query3);
+			while (set.next()){
+				tuple = ""+set.getInt("open_amount");
+			}
+			result += "\"open_amount\":"+tuple+"";
+
+			result += "}";
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}finally {
+			close();
+		}
+		return result;
 	}
 }

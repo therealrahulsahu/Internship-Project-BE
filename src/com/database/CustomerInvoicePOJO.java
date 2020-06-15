@@ -3,7 +3,7 @@ package com.database;
 import java.util.Arrays;
 
 public class CustomerInvoicePOJO {
-	public String[] features = {"pk_id", "acct_doc_header_id", "company_id", "document_number", "document_number_norm",
+	public transient String[] features = {"pk_id", "acct_doc_header_id", "company_id", "document_number", "document_number_norm",
 			"business_code", "create_year", "document_line_number", "doctype", "customer_number", "customer_number_norm",
 			"fk_customer_map_id", "customer_name", "division", "document_create_date", "document_create_date_norm",
 			"posting_date", "posting_date_norm", "posting_id", "due_date", "due_date_norm", "order_date",
