@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "CustomersQueryWithOA", urlPatterns = {"/customer_search_with_OA"})
-public class CustomersQueryWithOA extends HttpServlet {
+@WebServlet(name = "UpdateOA_n_DT", urlPatterns = {"/update_oa_dt_by_pk_id"})
+public class UpdateOA_n_DT extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		handleRequest(request, response);
 	}
@@ -23,38 +23,18 @@ public class CustomersQueryWithOA extends HttpServlet {
 	void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		try{
-			String result="";
 			MySQLTool DB = new MySQLTool("jdbc:mysql://localhost:3306/project", "root", "root");
-			String param;
-			param = request.getParameter("by_cs_name");
-			if(param == null){
+			String pk_id = request.getParameter("pk_id");
+			String open_amount = request.getParameter("open_amount");
+			String doc_type = request.getParameter("doc_type");
+
+			if(pk_id == null || open_amount == null || doc_type == null){
 				throw new Exception();
 			}
 
-			boolean byCsName = Boolean.parseBoolean(param);
+			DB.updateOA_DocTypeByPk_Id(pk_id, open_amount, doc_type);
 
-			if(byCsName){
-				String name = request.getParameter("cs_name");
-				if(name == null){
-					throw new Exception();
-				}
-				result = DB.getCustomerListByTotalOpenAmount(byCsName, name, "", 0);
-			}else {
-				param = request.getParameter("use_compare");
-				if(param == null){
-					throw new Exception();
-				}
-				String use_compare = param;
-
-				param = request.getParameter("amount");
-				if(param == null){
-					throw new Exception();
-				}
-				int amount = Integer.parseInt(param);
-
-				result = DB.getCustomerListByTotalOpenAmount(byCsName, "", use_compare, amount);
-			}
-
+			String result = "{\"status\":\"success\"}";
 			PrintWriter out = response.getWriter();
 			out.print(result);
 			response.setContentType("application/json");
@@ -63,5 +43,4 @@ public class CustomersQueryWithOA extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
-
 }

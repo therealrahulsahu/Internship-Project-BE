@@ -27,32 +27,57 @@ public class FetchListOfPeople extends HttpServlet {
 
 	void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		try{
-			int limit = Integer.parseInt(request.getParameter("limit"));
-			int offset = Integer.parseInt(request.getParameter("offset"));
-			String query;
 
-			MySQLTool DB = new MySQLTool("jdbc:mysql://localhost:3306/project", "root", "root");
+		int limit = 0, offset = 0;
 
+		String limit_p = request.getParameter("limit");
+		String offset_p = request.getParameter("offset");
+		if(limit_p == null || offset_p == null){
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}else {
 			try{
-				int cs_number = Integer.parseInt(request.getParameter("cs_number"));
-				query = "select * from customer_invoice where isopen=1 and customer_number="+cs_number+" limit "+limit+" offset "+offset+";";
+				limit = Integer.parseInt(limit_p);
+				offset = Integer.parseInt(offset_p);
 			}catch (Exception e){
-				query = "select * from customer_invoice where isopen=1 limit "+limit+" offset "+offset+";";
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
-
-			ArrayList<CustomerInvoicePOJO> result = DB.selectQuery(query);
-
-			Gson gson = new Gson();
-			String element = gson.toJson(result, new TypeToken<ArrayList<CustomerInvoicePOJO>>() {}.getType());
-
-			PrintWriter out = response.getWriter();
-			out.print(element);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-		}catch (NumberFormatException e){
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
+
+		String query="";
+
+		MySQLTool DB = new MySQLTool("jdbc:mysql://localhost:3306/project", "root", "root");
+
+		String by_CN = request.getParameter("by_CN");
+		if(by_CN != null){
+			if(Boolean.parseBoolean(by_CN)){
+				String cs_number = request.getParameter("cs_number");
+				if(cs_number != null){
+					query = "select * from customer_invoice where customer_number="+cs_number+" order by clearing_date limit "+limit+" offset "+offset+";";
+				}else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				}
+			}else{
+				String business_code = request.getParameter("business_code");
+				if(business_code != null){
+					query = "select * from customer_invoice where binary business_code=\""+business_code+"\" order by clearing_date limit "+limit+" offset "+offset+";";
+				}else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				}
+			}
+		}else {
+			query = "select * from customer_invoice order by clearing_date limit "+limit+" offset "+offset+";";
+		}
+
+		ArrayList<CustomerInvoicePOJO> result = DB.selectQuery(query);
+
+		Gson gson = new Gson();
+		String element = gson.toJson(result, new TypeToken<ArrayList<CustomerInvoicePOJO>>() {}.getType());
+
+		PrintWriter out = response.getWriter();
+		out.print(element);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
 	}
 
 }

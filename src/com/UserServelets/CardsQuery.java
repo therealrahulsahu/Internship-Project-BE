@@ -31,22 +31,40 @@ public class CardsQuery extends HttpServlet {
 			String result = "{";
 			String alias = "";
 			String query = "";
+			String business_code = request.getParameter("business_code");
+			if(business_code == null){
+				alias = "total_customer";
+				query = "select count(distinct customer_number) as "+alias+" from customer_invoice;";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
 
-			alias = "total_customer";
-			query = "select count(distinct customer_number) as "+alias+" from customer_invoice;";
-			result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
+				alias = "total_open_ar";
+				query = "select round(sum(total_open_amount)) as "+alias+" from customer_invoice;";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
 
-			alias = "total_open_ar";
-			query = "select round(sum(total_open_amount)) as "+alias+" from customer_invoice where isopen=1;";
-			result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
+				alias = "average_days_delay";
+				query = "select round(avg(dayspast_due)) as "+alias+" from customer_invoice;";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
 
-			alias = "average_days_delay";
-			query = "select round(avg(dayspast_due)) as "+alias+" from customer_invoice;";
-			result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
+				alias = "total_open_invoices";
+				query = "select count(customer_number) as "+alias+" from customer_invoice where isopen=1;";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\"";
+			}else{
+				alias = "total_customer";
+				query = "select count(distinct customer_number) as "+alias+" from customer_invoice where binary business_code=\""+business_code+"\";";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
 
-			alias = "total_open_invoices";
-			query = "select count(customer_number) as "+alias+" from customer_invoice where isopen=1;";
-			result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\"";
+				alias = "total_open_ar";
+				query = "select round(sum(total_open_amount)) as "+alias+" from customer_invoice where binary business_code=\""+business_code+"\";";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
+
+				alias = "average_days_delay";
+				query = "select round(avg(dayspast_due)) as "+alias+" from customer_invoice where binary business_code=\""+business_code+"\";";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\",";
+
+				alias = "total_open_invoices";
+				query = "select count(customer_number) as "+alias+" from customer_invoice where isopen=1 and business_code=\""+business_code+"\";";
+				result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\"";
+			}
 
 			result += "}";
 
@@ -55,7 +73,7 @@ public class CardsQuery extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 		}catch (NumberFormatException e){
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
 }

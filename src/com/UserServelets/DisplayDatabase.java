@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "DisplayDatabase", urlPatterns = {"/DisplayDatabase"})
 public class DisplayDatabase extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/pages/DBTable.jsp");
 		dispatcher.include(request, response);
 	}

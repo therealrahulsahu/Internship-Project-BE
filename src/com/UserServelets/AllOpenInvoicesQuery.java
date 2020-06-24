@@ -27,16 +27,30 @@ public class AllOpenInvoicesQuery extends HttpServlet {
 			String result = "{";
 			String alias = "";
 			String query = "";
-
 			alias = "open_invoices";
-			try{
-				int cs_number = Integer.parseInt(request.getParameter("cs_number"));
-				query = "select count(*) as "+alias+" from customer_invoice where isopen=1 and customer_number="+cs_number+";";
-			}catch (Exception e){
-				query = "select count(*) as "+alias+" from customer_invoice where isopen=1;";
+
+			String by_CN = request.getParameter("by_CN");
+			if(by_CN != null){
+				if(Boolean.parseBoolean(by_CN)){
+					String cs_number = request.getParameter("cs_number");
+					if(cs_number != null){
+						query = "select count(*) as "+alias+" from customer_invoice where customer_number="+cs_number+";";
+					}else {
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
+				}else{
+					String business_code = request.getParameter("business_code");
+					if(business_code != null){
+						query = "select count(*) as "+alias+" from customer_invoice where binary business_code=\""+business_code+"\";";
+					}else {
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
+				}
+			}else{
+				query = "select count(*) as "+alias+" from customer_invoice;";
 			}
 
-			result += "\"" +alias+ "\":\"" +DB.customSingleValueQuery(query, alias)+"\"";
+			result += "\"" +alias+ "\":" +DB.customSingleValueQuery(query, alias);
 
 			result += "}";
 
@@ -45,7 +59,7 @@ public class AllOpenInvoicesQuery extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 		}catch (NumberFormatException e){
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
 }

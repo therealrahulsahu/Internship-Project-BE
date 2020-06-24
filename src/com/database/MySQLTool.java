@@ -734,6 +734,7 @@ public class MySQLTool {
 		return result;
 	}
 
+	// query for single value with an alias name
 	public Integer customSingleValueQuery(String query, String alias){
 		Integer out = null;
 		try{
@@ -752,11 +753,36 @@ public class MySQLTool {
 		return out;
 	}
 
-	public String getCustomerListByTotalOpenAmount(String name_regex){
+	// list of customer search with total open amount by name regular expression
+	public String getCustomerListByTotalOpenAmount(boolean byCsName, String nameRegex, String use_compare, int amount){
 		String result = "";
-		String query = "select round(sum(total_open_amount)) as open_amount, customer_name, customer_number " +
-				"from customer_invoice where isopen=1 and customer_name regexp '"+
-				name_regex+"' group by customer_name, customer_number;";
+		String query = "";
+		if(byCsName){
+			query = "select round(sum(total_open_amount)) as open_amount, customer_name, customer_number " +
+					"from customer_invoice where customer_name regexp '"+
+					nameRegex+"' or customer_number regexp '"+
+					nameRegex+"' group by customer_name, customer_number;";
+		}else {
+			String cmp = "";
+			if(use_compare.equals("m")) {
+				cmp = ">";
+			}else if(use_compare.equals("l")) {
+				cmp = "<";
+			}else if(use_compare.equals("me")) {
+				cmp = ">=";
+			}else if(use_compare.equals("le")) {
+				cmp = "<=";
+			}else if(use_compare.equals("ne")) {
+				cmp = "!=";
+			}else {
+				cmp = "=";
+			}
+			
+			query = "select * from (select round(sum(total_open_amount)) as open_amount, customer_name, " +
+					"customer_number from customer_invoice group by customer_name, customer_number) as A " +
+					"where A.open_amount "+cmp+" "+amount+";";
+		}
+
 		try{
 			Class.forName(S_driver);
 			conn = DriverManager.getConnection(S_url, S_user, S_password);
@@ -782,10 +808,11 @@ public class MySQLTool {
 		return "["+result+"]";
 	}
 
+	// single value query by customer number
 	public String getCustomerNameByNumber(int number){
 		String query = "select customer_name from customer_invoice where customer_number="+number+" limit 1";
 		String query2 = "select count(*) as open_invoices from customer_invoice where isopen=1 and customer_number="+number+";";
-		String query3 = "select round(sum(total_open_amount)) as open_amount from customer_invoice where isopen=1 and customer_number="+number+";";
+		String query3 = "select round(sum(total_open_amount)) as open_amount from customer_invoice where customer_number="+number+";";
 		String result = "{";
 		String tuple = "";
 		try{
@@ -817,5 +844,53 @@ public class MySQLTool {
 			close();
 		}
 		return result;
+	}
+
+	public String getAllCustomerOpenAmount(){
+		String result = "";
+		String query = "select round(sum(total_open_amount)) as open_amount, customer_number, business_code " +
+				"from customer_invoice group by customer_number, business_code order by open_amount desc;";
+
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+			ResultSet set = stmt.executeQuery(query);
+			while (set.next()){
+				String tuple="{";
+				tuple += "\"open_amount\":"+set.getInt("open_amount")+",";
+				tuple += "\"customer_number\":\""+set.getString("customer_number")+"\",";
+				tuple += "\"business_code\":\""+set.getString("business_code")+"\"";
+				tuple += "},";
+				result += tuple;
+			}
+
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}finally {
+			close();
+		}
+		if(result.length() > 0){
+			result = result.substring(0, result.length()-1);
+		}
+		return "["+result+"]";
+	}
+
+	public void updateOA_DocTypeByPk_Id(String pk_id, String open_amount, String doc_type){
+		String query = "update customer_invoice set total_open_amount = "+
+				open_amount+", doctype='"+doc_type+"' where pk_id = "+pk_id+";";
+
+		try{
+			Class.forName(S_driver);
+			conn = DriverManager.getConnection(S_url, S_user, S_password);
+			stmt = conn.createStatement();
+
+			stmt.executeUpdate(query);
+
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}finally {
+			close();
+		}
 	}
 }
